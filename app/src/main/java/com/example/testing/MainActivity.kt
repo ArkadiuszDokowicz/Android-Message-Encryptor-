@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity()  {
             } else if(message == "cbc" && activity == "decrypt"){
                 val encryptedText = MyCipher.AESdecrypt(textToEncryptTextBox.text.toString(), MyCipher.Mode.CBC, klucz, wektor)
                 encryptedTextBox.setText(encryptedText)
-
         }/*
             else if(message == "ofb"){
                 val encryptedText = MyCipher.AESencrypt(textToEncryptTextBox.text.toString(), MyCipher.Mode.OFB)
