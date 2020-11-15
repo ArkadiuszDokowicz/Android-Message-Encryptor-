@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity()  {
         val encryptedTextBox = findViewById<EditText>(R.id.encrpytedText)
         val key = findViewById<EditText>(R.id.key)
         val vec = findViewById<EditText>(R.id.init_vec)
+
+        if(activity == "decrypt"){
+            button.text = "decrypt"
+        }
+
         button.setOnClickListener {
             if (mInterstitialAd.isLoaded) {
                 mInterstitialAd.show()
@@ -72,22 +77,23 @@ class MainActivity : AppCompatActivity()  {
             } else if(message == "cbc" && activity == "decrypt"){
                 val encryptedText = MyCipher.AESdecrypt(textToEncryptTextBox.text.toString(), MyCipher.Mode.CBC, klucz, wektor)
                 encryptedTextBox.setText(encryptedText)
-        }/*
-            else if(message == "ofb"){
-                val encryptedText = MyCipher.AESencrypt(textToEncryptTextBox.text.toString(), MyCipher.Mode.OFB)
+            }
+            else if(message == "ofb" && activity == "encrypt"){
+                val encryptedText = MyCipher.AESencryptModeOFB(textToEncryptTextBox.text.toString(), klucz, wektor)
                 encryptedTextBox.setText(encryptedText)
                 println("you picked ofb")
-            }
-            else if(message == "cfb"){
-                val encryptedText = MyCipher.AESencrypt(textToEncryptTextBox.text.toString(), MyCipher.Mode.CFB)
+            } else if(message == "ofb" && activity == "decrypt"){
+                val encryptedText = MyCipher.AESdecryptModeOFB(textToEncryptTextBox.text.toString(), klucz, wektor)
                 encryptedTextBox.setText(encryptedText)
-                println("you picked cfb")
             }
-            else if (message == "ctr"){
-                val encryptedText = MyCipher.AESencrypt(textToEncryptTextBox.text.toString(), MyCipher.Mode.CTR)
+            else if(message == "ecb" && activity == "encrypt"){
+                val encryptedText = MyCipher.AESencryptModeECB(textToEncryptTextBox.text.toString(), klucz, wektor)
                 encryptedTextBox.setText(encryptedText)
-                println("you picked CTR")
-            }*/
+                println("you picked ecb")
+            } else if(message == "ecb" && activity == "decrypt"){
+                val encryptedText = MyCipher.AESdecryptModeECB(textToEncryptTextBox.text.toString(), klucz, wektor)
+                encryptedTextBox.setText(encryptedText)
+            }
         }
     }
 }

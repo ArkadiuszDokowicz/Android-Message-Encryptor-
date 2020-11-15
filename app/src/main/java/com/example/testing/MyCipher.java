@@ -55,9 +55,8 @@ public class MyCipher {
 
         return null;
     }
-    /*
-    @Deprecated
-    public static String AESencryptModeOFB(String value) {
+
+    public static String AESencryptModeOFB(String value, String key, String initVector) {
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
             SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
@@ -72,8 +71,8 @@ public class MyCipher {
         }
         return null;
     }
-    @Deprecated
-    public static String AESdecryptModeOFB(String encrypted) {
+
+    public static String AESdecryptModeOFB(String encrypted, String key, String initVector) {
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
             SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
@@ -89,9 +88,8 @@ public class MyCipher {
 
         return null;
     }
-*/
-/*
-    public static String AESencryptModeECB(String input) {
+
+    public static String AESencryptModeECB(String input, String key, String initVector) {
         byte[] crypted = null;
         try {
 
@@ -103,22 +101,23 @@ public class MyCipher {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-        java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
 
-        return encoder.encodeToString(crypted);
+        //java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+
+       // return encoder.encodeToString(crypted);
+        return Base64.encodeToString(crypted,Base64.DEFAULT);
     }
-    public static String AESdecryptModeECB(String input) {
+    public static String AESdecryptModeECB(String input, String key, String initVector) {
         byte[] output = null;
         try {
-            java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
             SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skey);
-            output = cipher.doFinal(decoder.decode(input));
+            output = cipher.doFinal(Base64.decode(input,Base64.DEFAULT));
+
         } catch (Exception e) {
             System.out.println(e.toString());
         }
         return new String(output);
     }
-*/
 }
