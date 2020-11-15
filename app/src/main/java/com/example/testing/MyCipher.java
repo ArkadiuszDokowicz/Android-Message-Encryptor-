@@ -2,7 +2,6 @@ package com.example.testing;
 
 
 import android.util.Base64;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -19,13 +18,12 @@ public class MyCipher {
         public String toString() {
             return text;
         }
-
     }
 
-    private static final String key = "aesEncryptionKey";
-    private static final String initVector = "encryptionIntVec";
+    //public static String key = "aesEncryptionKey";
+    //public static String initVector = "encryptionIntVec";
 
-    public static String AESencrypt(String value,Mode mode) {
+    public static String AESencrypt(String value,Mode mode, String key, String initVector) {
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
             SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
@@ -41,7 +39,7 @@ public class MyCipher {
         }
         return null;
     }
-    public static String AESdecrypt(String encrypted,Mode mode) {
+    public static String AESdecrypt(String encrypted,Mode mode, String key, String initVector) {
         try {
             IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
             SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
@@ -68,7 +66,7 @@ public class MyCipher {
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
 
             byte[] encrypted = cipher.doFinal(value.getBytes());
-            return Base64.encodeBase64String(encrypted);
+            return Base64.encodeToString(encrypted,Base64.DEFAULT);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -82,7 +80,7 @@ public class MyCipher {
 
             Cipher cipher = Cipher.getInstance("AES/OFB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
-            byte[] original = cipher.doFinal(Base64.decodeBase64(encrypted));
+            byte[] original = cipher.doFinal(Base64.decode(encrypted,Base64.DEFAULT));
 
             return new String(original);
         } catch (Exception ex) {
@@ -91,9 +89,8 @@ public class MyCipher {
 
         return null;
     }
-
-
-
+*/
+/*
     public static String AESencryptModeECB(String input) {
         byte[] crypted = null;
         try {
@@ -123,6 +120,5 @@ public class MyCipher {
         }
         return new String(output);
     }
-        */
-
+*/
 }

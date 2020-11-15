@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Text encryptor</string>
+    <string name="admob_app_id">ca-app-pub-7603415795150891~9189273937</string>
+    <string name="admob_banner_ad">ca-app-pub-7603415795150891/5515103871</string>
+    <string name="admob_fullscreen_ad">ca-app-pub-7603415795150891/3922820603</string>
+
 </resources>
