@@ -89,10 +89,9 @@ public class MyCipher {
         return null;
     }
 
-    public static String AESencryptModeECB(String input, String key, String initVector) {
+    public static String AESencryptModeECB(String input, String key) {
         byte[] crypted = null;
         try {
-
             SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
 
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -107,17 +106,17 @@ public class MyCipher {
        // return encoder.encodeToString(crypted);
         return Base64.encodeToString(crypted,Base64.DEFAULT);
     }
-    public static String AESdecryptModeECB(String input, String key, String initVector) {
+    public static String AESdecryptModeECB(String input, String key) {
         byte[] output = null;
         try {
             SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skey);
             output = cipher.doFinal(Base64.decode(input,Base64.DEFAULT));
-
+            return new String(output);
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-        return new String(output);
+        return null;
     }
 }

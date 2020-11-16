@@ -36,8 +36,7 @@ class MainActivity : AppCompatActivity()  {
         var bundle_activity :Bundle ?=intent.extras
         var message = bundle!!.getString("algorithm")
         var activity = bundle_activity!!.getString("activity")
-        println(message)
-        println(activity)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -87,11 +86,11 @@ class MainActivity : AppCompatActivity()  {
                 encryptedTextBox.setText(encryptedText)
             }
             else if(message == "ecb" && activity == "encrypt"){
-                val encryptedText = MyCipher.AESencryptModeECB(textToEncryptTextBox.text.toString(), klucz, wektor)
+                val encryptedText = MyCipher.AESencryptModeECB(textToEncryptTextBox.text.toString(), klucz)
                 encryptedTextBox.setText(encryptedText)
                 println("you picked ecb")
             } else if(message == "ecb" && activity == "decrypt"){
-                val encryptedText = MyCipher.AESdecryptModeECB(textToEncryptTextBox.text.toString(), klucz, wektor)
+                val encryptedText = MyCipher.AESdecryptModeECB(textToEncryptTextBox.text.toString(), klucz)
                 encryptedTextBox.setText(encryptedText)
             }
         }
